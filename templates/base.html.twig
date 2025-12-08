@@ -21,6 +21,10 @@
         {% if app.user %}
             {# CAS 1 : Utilisateur Connecté #}
             <span style="color: #e5e5e5; font-size: 0.9em;">Bonjour {{ app.user.email }}</span>
+
+            {# --- AJOUT DU LIEN MA LISTE ICI --- #}
+            <a href="{{ path('app_watchlist_index') }}" style="color: white; text-decoration: none; font-size: 0.9em; font-weight: bold;">Ma Liste</a>
+
             <a href="{{ path('app_logout') }}" style="color: #aaa; text-decoration: none; font-size: 0.9em; border: 1px solid #aaa; padding: 5px 10px; border-radius: 4px;">Se déconnecter</a>
         {% else %}
             {# CAS 2 : Visiteur #}
