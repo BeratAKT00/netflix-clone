@@ -21,6 +21,8 @@
             border-radius: 4px;
             overflow: hidden;
             transition: transform 0.3s;
+            /* On s'assure que le lien s'affiche en bloc */
+            display: block;
         }
         .movie-card:hover {
             transform: scale(1.05);
@@ -45,7 +47,8 @@
 
         <div class="movie-grid">
             {% for movie in movies %}
-                <div class="movie-card">
+                {# ICI : On a transformé la DIV en lien A vers la page de détail #}
+                <a href="{{ path('app_movie_show', {id: movie.id}) }}" class="movie-card" style="text-decoration: none; color: white;">
                     <img src="{{ movie.coverImage }}" alt="{{ movie.titre }}" class="movie-poster">
                     <div class="movie-info">
                         <div class="movie-title">{{ movie.titre }}</div>
@@ -53,7 +56,7 @@
                         {{ movie.isSeries ? 'SÉRIE' : 'FILM' }}
                     </span>
                     </div>
-                </div>
+                </a>
             {% else %}
                 <p>Aucun film trouvé.</p>
             {% endfor %}
