@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Netflix Clone{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body style="margin: 0; background-color: #141414; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+
+{# --- DEBUT DE LA NAVBAR --- #}
+<nav style="background-color: #141414; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000;">
+    <a href="{{ path('app_home') }}" style="color: #e50914; font-size: 30px; font-weight: bold; text-decoration: none;">NETFLIX</a>
+
+    <div style="display: flex; align-items: center; gap: 20px;">
+        {% if app.user %}
+            {# CAS 1 : Utilisateur Connecté #}
+            <span style="color: #e5e5e5; font-size: 0.9em;">Bonjour {{ app.user.email }}</span>
+            <a href="{{ path('app_logout') }}" style="color: #aaa; text-decoration: none; font-size: 0.9em; border: 1px solid #aaa; padding: 5px 10px; border-radius: 4px;">Se déconnecter</a>
+        {% else %}
+            {# CAS 2 : Visiteur #}
+            <a href="{{ path('app_login') }}" style="color: white; text-decoration: none; font-weight: bold;">Se connecter</a>
+            <a href="{{ path('app_register') }}" style="background-color: #e50914; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: bold;">S'inscrire</a>
+        {% endif %}
+    </div>
+</nav>
+{# --- FIN DE LA NAVBAR --- #}
+
+{# Ici s'affichera le contenu de tes autres pages (Home, Login, etc.) #}
+{% block body %}{% endblock %}
+
+</body>
 </html>
