@@ -34,14 +34,30 @@
                 {{ movie.description }}
             </p>
 
-            {# Bouton d'action (On le rendra fonctionnel juste après) #}
+            {# --- ZONE DES BOUTONS --- #}
+
+            {# Bouton Lecture (décoratif) #}
             <a href="#" style="background-color: white; color: black; padding: 10px 25px; text-decoration: none; font-weight: bold; border-radius: 4px; font-size: 1.1rem;">
                 ▶ Lecture
             </a>
 
-            <button style="background-color: rgba(109, 109, 110, 0.7); color: white; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; font-size: 1.1rem; cursor: pointer; margin-left: 10px;">
-                + Ma Liste
-            </button>
+            {# Bouton Watchlist Dynamique #}
+            {% if app.user %}
+                {# 1. On vérifie si le film est déjà dans la liste de l'utilisateur #}
+                {% set inWatchlist = false %}
+                {% for m in app.user.watchlist %}
+                    {% if m.id == movie.id %}
+                        {% set inWatchlist = true %}
+                    {% endif %}
+                {% endfor %}
+
+                {# 2. Le lien qui déclenche l'action #}
+                <a href="{{ path('app_watchlist_toggle', {id: movie.id}) }}"
+                   style="margin-left: 10px; text-decoration: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; font-size: 1.1rem; border: none; cursor: pointer; background-color: rgba(109, 109, 110, 0.7); color: white;">
+                    {{ inWatchlist ? '✓ Ma Liste' : '+ Ma Liste' }}
+                </a>
+            {% endif %}
+
         </div>
     </div>
 {% endblock %}
