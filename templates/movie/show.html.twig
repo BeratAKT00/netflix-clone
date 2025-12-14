@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ movie.titre }}{% endblock %}
+
+{% block body %}
+    <div style="background-color: #141414; min-height: 100vh; color: white; padding: 50px;">
+
+        {# Bouton retour #}
+        <a href="{{ path('app_home') }}" style="color: #aaa; text-decoration: none;">&larr; Retour à l'accueil</a>
+
+        <div style="display: flex; gap: 40px; margin-top: 20px; flex-wrap: wrap;">
+            {# Image #}
+            <img src="{{ movie.coverImage }}" alt="{{ movie.titre }}" style="max-width: 300px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+
+            {# Détails #}
+            <div style="max-width: 600px;">
+                <h1 style="font-size: 3em; margin: 0;">{{ movie.titre }}</h1>
+
+                <div style="color: #aaa; margin: 10px 0;">
+                    <span style="border: 1px solid #aaa; padding: 2px 5px; font-size: 0.8em;">{{ movie.releaseDate|date('Y') }}</span>
+                    &nbsp; • &nbsp;
+                    {{ movie.isSeries ? 'Série TV' : 'Film' }}
+                </div>
+
+                <p style="font-size: 1.2em; line-height: 1.6; margin-top: 20px;">
+                    {{ movie.description|raw }}
+                </p>
+
+                {# --- BOUTONS D'ACTION --- #}
+                <div style="margin-top: 30px; display: flex; align-items: center; gap: 15px;">
+
+                    {# Bouton Lecture #}
+                    <button style="background-color: white; color: black; border: none; padding: 10px 25px; font-weight: bold; font-size: 1.2em; border-radius: 4px; cursor: pointer;">
+                        ▶ Lecture
+                    </button>
+
+                    {# Bouton Ma Liste (Intégré) #}
+                    {% if app.user %}
+                        {# Si connecté : on affiche le bouton qui change selon l'état #}
+                        <a href="{{ path('app_watchlist_toggle', {id: movie.id}) }}"
+                           style="background-color: rgba(109, 109, 110, 0.7); color: white; border: none; padding: 10px 25px; font-weight: bold; font-size: 1.2em; border-radius: 4px; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                            {% if isInWatchlist %}
+                                ✓ Ma liste
+                            {% else %}
+                                + Ma liste
+                            {% endif %}
+                        </a>
+                    {% else %}
+                        {# Si pas connecté : petit lien discret pour inviter à la connexion #}
+                        <a href="{{ path('app_login') }}" style="color: #aaa; text-decoration: none; font-size: 0.9em;">
+                            (Connectez-vous pour ajouter à votre liste)
+                        </a>
+                    {% endif %}
+
+                </div>
+                {# --- FIN BOUTONS --- #}
+
+                {# Catégories #}
+                <div style="margin-top: 30px; color: #aaa; font-size: 0.9em;">
+                    Genres :
+                    {% for category in movie.categories %}
+                        <span style="color: white;">{{ category.name }}</span>{{ not loop.last ? ', ' : '' }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

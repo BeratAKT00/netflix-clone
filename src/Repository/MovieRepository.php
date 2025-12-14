@@ -16,28 +16,17 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
-    //    /**
-    //     * @return Movie[] Returns an array of Movie objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Movie
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Recherche les films par titre (Barre de recherche)
+     * @return Movie[]
+     */
+    public function findBySearch(string $query): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.titre LIKE :val')
+            ->setParameter('val', '%' . $query . '%') // Le % permet de chercher avant et après le mot
+            ->orderBy('m.id', 'DESC') // On affiche les plus récents en premier
+            ->getQuery()
+            ->getResult();
+    }
 }
