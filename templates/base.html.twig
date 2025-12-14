@@ -13,12 +13,12 @@
 </head>
 <body style="margin: 0; background-color: #141414; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
 
-{# --- DEBUT DE LA NAVBAR --- #}
+
 <nav style="background-color: #141414; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000;">
-    {# 1. LOGO #}
+
     <a href="{{ path('app_home') }}" style="color: #e50914; font-size: 30px; font-weight: bold; text-decoration: none; margin-right: 20px;">NETFLIX</a>
 
-    {# 2. BARRE DE RECHERCHE (Nouveau !) #}
+
     <form action="{{ path('app_home') }}" method="get" style="flex-grow: 1; max-width: 400px; margin: 0 20px;">
         <div style="position: relative;">
             <input type="text"
@@ -30,7 +30,7 @@
         </div>
     </form>
 
-    {# 3. MENU UTILISATEUR #}
+
     <div style="display: flex; align-items: center; gap: 20px;">
         {% if app.user %}
             <span style="color: #e5e5e5; font-size: 0.9em;">Bonjour {{ app.user.email }}</span>
@@ -45,9 +45,8 @@
         {% endif %}
     </div>
 </nav>
-{# --- FIN DE LA NAVBAR --- #}
 
-{# Ici s'affichera le contenu de tes autres pages (Home, Login, etc.) #}
+
 {% block body %}{% endblock %}
 
 </body>

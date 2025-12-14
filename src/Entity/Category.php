@@ -70,8 +70,7 @@ class Category
         return $this;
     }
 
-    // --- C'EST CETTE FONCTION QUI CORRIGE L'ERREUR ---
-    // Elle transforme l'objet en chaîne de caractères (le nom de la catégorie)
+
     public function __toString(): string
     {
         return $this->name;

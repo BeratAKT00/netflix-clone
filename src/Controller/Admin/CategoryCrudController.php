@@ -17,10 +17,10 @@ class CategoryCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            // On cache l'ID (géré par la base de données)
+
             IdField::new('id')->hideOnForm(),
 
-            // Le champ pour le nom de la catégorie
+
             TextField::new('name', 'Nom de la catégorie'),
         ];
     }

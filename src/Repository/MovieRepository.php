@@ -24,8 +24,8 @@ class MovieRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.titre LIKE :val')
-            ->setParameter('val', '%' . $query . '%') // Le % permet de chercher avant et après le mot
-            ->orderBy('m.id', 'DESC') // On affiche les plus récents en premier
+            ->setParameter('val', '%' . $query . '%')
+            ->orderBy('m.id', 'DESC')
             ->getQuery()
             ->getResult();
     }

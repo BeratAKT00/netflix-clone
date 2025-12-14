@@ -10,10 +10,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Http\Attribute\IsGranted; // <--- Ligne ajoutée
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
-#[IsGranted('ROLE_ADMIN')] // <--- Ligne ajoutée : Seuls les admins passent !
+#[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
@@ -25,19 +25,19 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Netflix Admin')
-            ->renderContentMaximized(); // Utilise toute la largeur
+            ->renderContentMaximized();
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
 
-        // Section Catalogue
+
         yield MenuItem::section('Catalogue');
         yield MenuItem::linkToCrud('Films', 'fas fa-film', Movie::class);
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
 
-        // Section Utilisateurs
+
         yield MenuItem::section('Utilisateurs');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
     }

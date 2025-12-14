@@ -47,7 +47,6 @@
 
         <div class="movie-grid">
             {% for movie in movies %}
-                {# ICI : On a transformé la DIV en lien A vers la page de détail #}
                 <a href="{{ path('app_movie_show', {id: movie.id}) }}" class="movie-card" style="text-decoration: none; color: white;">
                     <img src="{{ movie.coverImage }}" alt="{{ movie.titre }}" class="movie-poster">
                     <div class="movie-info">

@@ -21,20 +21,18 @@ class RegistrationFormType extends AbstractType
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
-                    // C'était déjà bon ici
                     new IsTrue(message: 'You should agree to our terms.'),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
-                    // CORRECTION ICI : J'ai enlevé les crochets [] et les flèches =>
+
                     new NotBlank(message: 'Please enter a password'),
 
-                    // CORRECTION ICI AUSSI : Arguments nommés (PHP 8 / Symfony 7)
+
                     new Length(
                         min: 6,
                         minMessage: 'Your password should be at least {{ limit }} characters',

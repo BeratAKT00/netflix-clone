@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // 1. Créer des Catégories
+
         $categories = [];
         $genres = ['Action', 'Comédie', 'Drame', 'Science-Fiction', 'Horreur', 'Animation'];
 
@@ -31,12 +31,12 @@ class AppFixtures extends Fixture
             $categories[] = $category;
         }
 
-        // 2. Créer des Films
+
         $movies = [];
         for ($i = 1; $i <= 20; $i++) {
             $movie = new Movie();
 
-            // CORRECTION ICI : setTitre au lieu de setTitle
+
             $movie->setTitre("Film " . $i);
 
             $movie->setDescription("Ceci est la description du film numéro " . $i);
@@ -50,21 +50,21 @@ class AppFixtures extends Fixture
             $movies[] = $movie;
         }
 
-        // 3. Créer les Users
-        // Admin
+
+
         $admin = new User();
         $admin->setEmail('admin@netflix.com');
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin123'));
         $manager->persist($admin);
 
-        // User Normal
+
         $user = new User();
         $user->setEmail('user@netflix.com');
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordHasher->hashPassword($user, 'user123'));
 
-        // Watchlist
+
         $user->addWatchlist($movies[0]);
         $user->addWatchlist($movies[5]);
 
